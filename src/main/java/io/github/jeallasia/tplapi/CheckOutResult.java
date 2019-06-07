@@ -4,18 +4,17 @@ import javax.money.MonetaryAmount;
 
 public final class CheckOutResult<T>{
 
-    private final ParkingSlotUsage<T> usage;
+    private final ParkingSlot<T> slot;
     private final MonetaryAmount price;
 
-    CheckOutResult(ParkingSlotUsage<T> usage, MonetaryAmount price){
-        this.usage = usage;
+    CheckOutResult(ParkingSlot<T> slot, MonetaryAmount price){
+        this.slot = slot;
         this.price = price;
     }
 
-    public ParkingSlotUsage<T> getUsage() {
-        return usage;
+    public ParkingSlot<T> getSlot() {
+        return slot;
     }
-
     public MonetaryAmount getPrice() {
         return price;
     }

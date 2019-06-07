@@ -2,18 +2,18 @@ package io.github.jeallasia.tplapi;
 
 public final class CheckInResult<T> {
 
-    private ParkingSlotUsage<T> usage;
+    private ParkingSlot<T> slot;
 
-    void setUsage(ParkingSlotUsage<T> usage) {
-        this.usage = usage;
+    void setSlot(ParkingSlot<T> slot) {
+        this.slot = slot;
     }
 
     public boolean isSuccessful(){
-        return usage != null;
+        return slot != null;
     }
 
-    public ParkingSlotUsage<T> getUsage() {
-        return usage;
+    public ParkingSlot<T> geSlot() {
+        return slot;
     }
 
 }

@@ -32,5 +32,4 @@ public interface PredicateWithAlt<T> extends Predicate<T> {
         };
     }
 
-
 }

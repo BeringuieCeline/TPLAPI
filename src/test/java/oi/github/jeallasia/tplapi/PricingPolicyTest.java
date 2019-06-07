@@ -1,9 +1,7 @@
 package oi.github.jeallasia.tplapi;
 
 import io.github.jeallasia.tplapi.ParkingSlot;
-import io.github.jeallasia.tplapi.ParkingSlotUsage;
 import io.github.jeallasia.tplapi.PricingPolicy;
-import org.javamoney.moneta.Money;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -13,41 +11,6 @@ import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
 public class PricingPolicyTest extends TestHelper {
-
-    private static class SimpleParkingSlotUsage implements ParkingSlotUsage<TestCar> {
-        final LocalDateTime in;
-        final LocalDateTime out;
-
-        SimpleParkingSlotUsage(LocalDateTime in, LocalDateTime out) {
-            this.in = in;
-            this.out = out;
-        }
-
-        @Override
-        public ParkingSlot<TestCar> getSlot() {
-            return null;
-        }
-
-        @Override
-        public TestCar getCar() {
-            return null;
-        }
-
-        @Override
-        public LocalDateTime getIncomingDateTime() {
-            return in;
-        }
-
-        @Override
-        public LocalDateTime getOutgoingDateTime() {
-            return out;
-        }
-
-        @Override
-        public boolean isUsingAlternative() {
-            return false;
-        }
-    }
     /**
      * Helper to test policies
      *
@@ -57,15 +20,11 @@ public class PricingPolicyTest extends TestHelper {
      */
     private static void assertPriceEqual(int expectedNbrEuro, PricingPolicy<TestCar> policy, int durationInMinutes) {
         LocalDateTime start = LocalDateTime.now();
-        assertEquals(
-                euros(expectedNbrEuro),
+        assertEquals(euros(expectedNbrEuro),
                 policy.computePrice(
-                        new SimpleParkingSlotUsage(
-                                start,
-                                start.plus(Duration.ofMinutes(durationInMinutes))
-                        )
-                )
-        );
+                        new ParkingSlot<>("dummy", t -> true, e20(),
+                                start, false, start.plus(Duration.ofMinutes(durationInMinutes))
+                        )));
     }
 
     @Test
@@ -120,10 +79,10 @@ public class PricingPolicyTest extends TestHelper {
 
     @Test
     public void AND() {
-        PricingPolicy<TestCar> and=PricingPolicy.AND(
+        PricingPolicy<TestCar> and = PricingPolicy.AND(
                 PricingPolicy.FIXED(euros(1)),
                 PricingPolicy.PER_FINISHED_HOUR(euros(5))
-                );
+        );
         assertPriceEqual(1, and, 30);
         assertPriceEqual(6, and, 60);
         assertPriceEqual(6, and, 119);
@@ -132,19 +91,30 @@ public class PricingPolicyTest extends TestHelper {
     @Test
     public void computePerHour() {
         Duration duration = Duration.ofHours(2);
-        MonetaryAmount fiveEuros= euros(5);
+        MonetaryAmount fiveEuros = euros(5);
         assertEquals(
                 fiveEuros.multiply(2),
                 PricingPolicy.computePerHour(duration, fiveEuros, true));
         assertEquals(
                 fiveEuros.multiply(2),
-                PricingPolicy.computePerHour(duration, fiveEuros,false));
+                PricingPolicy.computePerHour(duration, fiveEuros, false));
         duration = duration.plus(Duration.ofMinutes(1));
         assertEquals(
                 fiveEuros.multiply(3),
                 PricingPolicy.computePerHour(duration, fiveEuros, true));
         assertEquals(
                 fiveEuros.multiply(2),
-                PricingPolicy.computePerHour(duration, fiveEuros,false));
+                PricingPolicy.computePerHour(duration, fiveEuros, false));
+    }
+
+    @Test
+    public void testCustom(){
+        PricingPolicy<TestCar> freeForElectric = slot -> {
+            if ((slot.getCar().carType == CarType.ELECTRIC_20KW) || (slot.getCar().carType == CarType.ELECTRIC_50KW)){
+                return euros(0);
+            }
+            return PricingPolicy.<TestCar>PER_STARTED_HOUR(euros(10)).computePrice(slot);
+        };
+        assertPriceEqual(0, freeForElectric, 5000);
     }
 }

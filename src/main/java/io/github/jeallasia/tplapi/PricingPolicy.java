@@ -6,13 +6,13 @@ import java.time.temporal.ChronoUnit;
 
 public interface PricingPolicy<T> {
 
-    MonetaryAmount computePrice(ParkingSlotUsage<T> usage);
+    MonetaryAmount computePrice(ParkingSlot<T> slot);
 
     static <T> PricingPolicy<T> AND(PricingPolicy<T> policy1, PricingPolicy<T> policy2){
-        return usage -> policy1.computePrice(usage).add(policy2.computePrice(usage));
+        return slot -> policy1.computePrice(slot).add(policy2.computePrice(slot));
     }
     static <T> PricingPolicy<T> PER_HOUR(MonetaryAmount pricePerHour, boolean countHourStarted){
-        return usage -> computePerHour(usage.computeDuration(), pricePerHour, countHourStarted);
+        return slot -> computePerHour(slot.computeDuration(), pricePerHour, countHourStarted);
     }
     static <T> PricingPolicy<T> FIXED(MonetaryAmount fixedPrice){
         return usage -> fixedPrice;

@@ -29,7 +29,6 @@ public class ParkingTest extends TestHelper {
         e20ChargeNotRequired = e20ChargeNotRequired();
         e50ChargeNotRequired = e50ChargeNotRequired();
         other = other();
-
         // Note that if we park all theses cars:
         cars = e20List(5);  // -> will use 5 isE20 slot
         cars.addAll(e50List(5));  // -> will use 5 isE50 slot
@@ -43,11 +42,11 @@ public class ParkingTest extends TestHelper {
     public void testCheckInResultSuccessful() {
         CheckInResult<TestCar> checkInResult = parking.checkIn(e20, dateTime6h5min);
         assertTrue(checkInResult.isSuccessful());
-        ParkingSlotUsage<TestCar> inUsage = checkInResult.getUsage();
-        assertEquals(e20, inUsage.getCar());
-        assertEquals(dateTime6h5min, inUsage.getIncomingDateTime());
-        assertEquals("0", inUsage.getSlot().getId());
-        assertFalse(inUsage.isUsingAlternative());
+        ParkingSlot<TestCar> slot = checkInResult.geSlot();
+        assertEquals(e20, slot.getCar());
+        assertEquals(dateTime6h5min, slot.getIncomingDateTime());
+        assertEquals("0", slot.getId());
+        assertFalse(slot.getUsingAlternative());
     }
 
     @Test
@@ -63,12 +62,12 @@ public class ParkingTest extends TestHelper {
     public void testCheckOutResult() {
         assertTrue(parking.checkIn(e20, dateTime6h5min).isSuccessful());
         CheckOutResult<TestCar> checkOutResult = parking.checkOut(e20, dateTime6h55min);
-        ParkingSlotUsage<TestCar> outUsage = checkOutResult.getUsage();
-        assertEquals(dateTime6h5min, outUsage.getIncomingDateTime());
-        assertEquals(dateTime6h55min, outUsage.getOutgoingDateTime());
-        assertEquals(duration50min, outUsage.computeDuration());
-        assertTrue(outUsage.getSlot().getPolicy().testCompatible(e20));
-        assertFalse(outUsage.isUsingAlternative());
+        ParkingSlot<TestCar> slot = checkOutResult.getSlot();
+        assertEquals(dateTime6h5min, slot.getIncomingDateTime());
+        assertEquals(dateTime6h55min, slot.getOutgoingDateTime());
+        assertEquals(duration50min, slot.computeDuration());
+        assertTrue(slot.getPolicy().testCompatible(e20));
+        assertFalse(slot.getUsingAlternative());
         // Finally the price has to be 5 euros for the started hour + 1 euro fixed
         assertEquals(FIVE.add(ONE), checkOutResult.getPrice());
     }
@@ -213,7 +212,7 @@ public class ParkingTest extends TestHelper {
     @Test
     public void testClassicCheckInCheckOut(){
         parking.checkIn(e20);
-        assertEquals(e20, parking.checkOut(e20).getUsage().getCar());
+        assertEquals(e20, parking.checkOut(e20).getSlot().getCar());
     }
 
 }
