@@ -3,7 +3,7 @@ package oi.github.jeallasia.tplapi;
 public class TestCar{
 
     private final int id;
-    private boolean chargeNotRequired;
+    private final boolean chargeNotRequired;
     final CarType carType;
     private static int simpleCptForId=0;
 

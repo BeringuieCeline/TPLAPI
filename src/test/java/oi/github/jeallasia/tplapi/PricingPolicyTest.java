@@ -13,8 +13,8 @@ import static org.junit.Assert.*;
 public class PricingPolicyTest extends TestHelper {
 
     private static class SimpleParkingSlotUsage implements ParkingSlotUsage<TestCar> {
-        LocalDateTime in;
-        LocalDateTime out;
+        final LocalDateTime in;
+        final LocalDateTime out;
 
         SimpleParkingSlotUsage(LocalDateTime in, LocalDateTime out) {
             this.in = in;

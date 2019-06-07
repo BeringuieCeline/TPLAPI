@@ -16,7 +16,7 @@ public class Parking<T> {
 
             private final ParkingSlot<T> slot;
             private final T car;
-            private boolean usingAlternative;
+            private final boolean usingAlternative;
             private final LocalDateTime incomingDateTime;
             private LocalDateTime outgoingDateTime;
 
@@ -205,7 +205,7 @@ public class Parking<T> {
      * @param car the car you want to test
      * @return stream on free and preferred slot {@link ParkingSlot}
      */
-    Stream<ParkingSlotWithUsage<T>> getAvailableFor(T car) {
+    private Stream<ParkingSlotWithUsage<T>> getAvailableFor(T car) {
         return getAllAvailable().filter(s -> s.test(car));
     }
     /**

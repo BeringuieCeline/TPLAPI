@@ -16,12 +16,11 @@ public class TestHelper {
         return c -> c.carType == type;
     }
     // You can build the predicate like this
-    static Predicate<TestCar> isGAS = isType(CarType.GASOLINE);
-    static Predicate<TestCar> isE20 = isType(CarType.ELECTRIC_20KW);
+    static final Predicate<TestCar> isGAS = isType(CarType.GASOLINE);
+    static final Predicate<TestCar> isE20 = isType(CarType.ELECTRIC_20KW);
     // Or also like directly this
-    static Predicate<TestCar> isE50 = c -> c.carType == CarType.ELECTRIC_50KW;
-    static Predicate<TestCar> isOTHER = c -> c.carType == CarType.OTHER;
-    static Predicate<TestCar> isChargeNotRequired = TestCar::isChargeNotRequired;
+    static final Predicate<TestCar> isE50 = c -> c.carType == CarType.ELECTRIC_50KW;
+    static final Predicate<TestCar> isChargeNotRequired = TestCar::isChargeNotRequired;
 
     static TestCar gas(){return new TestCar(CarType.GASOLINE);}
     static TestCar e20(){return new TestCar(CarType.ELECTRIC_20KW);}
@@ -44,9 +43,9 @@ public class TestHelper {
     static LocalDateTime localDateTime(int hour, int minute){
         return LocalDateTime.of(2019, 6, 4, hour, minute, 0);
     }
-    static LocalDateTime dateTime6h5min = localDateTime(6, 5);
-    static Duration duration50min = Duration.ofMinutes(50);
-    static LocalDateTime dateTime6h55min = dateTime6h5min.plus(duration50min);
+    static final LocalDateTime dateTime6h5min = localDateTime(6, 5);
+    static final Duration duration50min = Duration.ofMinutes(50);
+    static final LocalDateTime dateTime6h55min = dateTime6h5min.plus(duration50min);
 
 
     static MonetaryAmount euros(int number){
