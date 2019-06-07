@@ -1,8 +1,6 @@
 package io.github.jeallasia.tplapi;
 
 import io.github.jeallasia.tplapi.exception.ParkingException;
-
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Stream;
@@ -51,17 +49,12 @@ public class Parking<T> {
             }
 
             void setOutgoingDateTime(LocalDateTime outgoingDateTime) {
-                if (outgoingDateTime == null || incomingDateTime.isAfter(outgoingDateTime)) {
+                Objects.requireNonNull(outgoingDateTime);
+                if (incomingDateTime.isAfter(outgoingDateTime)) {
                     throw new IllegalArgumentException("Outgoing date should be after incoming date !");
                 }
                 this.outgoingDateTime = outgoingDateTime;
             }
-
-            public Duration computeDuration() {
-                return Duration.between(incomingDateTime,
-                        outgoingDateTime != null ? outgoingDateTime : LocalDateTime.now());
-            }
-
         }
 
         final ParkingSlot<T> slot;
@@ -70,11 +63,6 @@ public class Parking<T> {
         ParkingSlotWithUsage(ParkingSlot<T> slot) {
             this.slot = slot;
         }
-
-        boolean isOccupiedBy(T car) {
-            return usage != null && usage.getCar() == car;
-        }
-
         /**
          * This will tel you if the slot is occupied or not
          *
@@ -255,7 +243,7 @@ public class Parking<T> {
     }
 
     public synchronized CheckOutResult<T> checkOut(T car, LocalDateTime outgoingDateTime) {
-        ParkingSlotUsage<T> usage = slotWithUsages.stream().filter(s -> s.isOccupiedBy(car)).findFirst().orElseThrow(
+        ParkingSlotUsage<T> usage = slotWithUsages.stream().filter(s -> !s.isFree() && s.usage.getCar() == car).findFirst().orElseThrow(
                 () -> new ParkingException("Car " + car + " not found !")).free(outgoingDateTime);
         return new CheckOutResult<>(usage, pricingPolicy.computePrice(usage));
     }
