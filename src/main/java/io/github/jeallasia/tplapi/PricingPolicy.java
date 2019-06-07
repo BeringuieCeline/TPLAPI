@@ -1,6 +1,7 @@
 package io.github.jeallasia.tplapi;
-import io.github.jeallasia.tplapi.util.MonetaryTools;
 import javax.money.MonetaryAmount;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
 
 public interface PricingPolicy<T> {
@@ -11,7 +12,7 @@ public interface PricingPolicy<T> {
         return usage -> policy1.computePrice(usage).add(policy2.computePrice(usage));
     }
     static <T> PricingPolicy<T> PER_HOUR(MonetaryAmount pricePerHour, boolean countHourStarted){
-        return usage -> MonetaryTools.computePerHour(usage.computeDuration(), pricePerHour, countHourStarted);
+        return usage -> computePerHour(usage.computeDuration(), pricePerHour, countHourStarted);
     }
     static <T> PricingPolicy<T> FIXED(MonetaryAmount fixedPrice){
         return usage -> fixedPrice;
@@ -29,6 +30,14 @@ public interface PricingPolicy<T> {
     }
     static <T> PricingPolicy<T> PER_STARTED_HOUR_AND_FIXED(MonetaryAmount pricePerHour, MonetaryAmount fixedPrice){
         return AND(PER_STARTED_HOUR(pricePerHour), FIXED(fixedPrice));
+    }
+
+    static MonetaryAmount computePerHour(Duration duration, MonetaryAmount pricePerHour, boolean countHourStarted){
+        MonetaryAmount price = pricePerHour.multiply(duration.toHours());
+        if (countHourStarted && (duration.truncatedTo(ChronoUnit.HOURS) != duration)){
+            price = price.add(pricePerHour);
+        }
+        return price;
     }
 
 }

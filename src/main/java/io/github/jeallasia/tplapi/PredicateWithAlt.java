@@ -1,4 +1,4 @@
-package io.github.jeallasia.tplapi.util;
+package io.github.jeallasia.tplapi;
 import java.util.Objects;
 import java.util.function.Predicate;
 

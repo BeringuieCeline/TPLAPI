@@ -12,9 +12,11 @@ public interface ParkingSlotUsage<T> {
     boolean isUsingAlternative();
 
     default Duration computeDuration() {
-        return Duration.between(
-                getIncomingDateTime(),
-                getOutgoingDateTime() != null ? getOutgoingDateTime() : LocalDateTime.now());
+        LocalDateTime outgoingDateTime = getOutgoingDateTime();
+        if(outgoingDateTime==null){
+            outgoingDateTime = LocalDateTime.now();
+        }
+        return Duration.between(getIncomingDateTime(), outgoingDateTime);
     }
 
 

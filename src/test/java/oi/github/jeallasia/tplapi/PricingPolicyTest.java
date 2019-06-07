@@ -3,8 +3,10 @@ package oi.github.jeallasia.tplapi;
 import io.github.jeallasia.tplapi.ParkingSlot;
 import io.github.jeallasia.tplapi.ParkingSlotUsage;
 import io.github.jeallasia.tplapi.PricingPolicy;
+import org.javamoney.moneta.Money;
 import org.junit.Test;
 
+import javax.money.MonetaryAmount;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -125,5 +127,24 @@ public class PricingPolicyTest extends TestHelper {
         assertPriceEqual(1, and, 30);
         assertPriceEqual(6, and, 60);
         assertPriceEqual(6, and, 119);
+    }
+
+    @Test
+    public void computePerHour() {
+        Duration duration = Duration.ofHours(2);
+        MonetaryAmount fiveEuros= euros(5);
+        assertEquals(
+                fiveEuros.multiply(2),
+                PricingPolicy.computePerHour(duration, fiveEuros, true));
+        assertEquals(
+                fiveEuros.multiply(2),
+                PricingPolicy.computePerHour(duration, fiveEuros,false));
+        duration = duration.plus(Duration.ofMinutes(1));
+        assertEquals(
+                fiveEuros.multiply(3),
+                PricingPolicy.computePerHour(duration, fiveEuros, true));
+        assertEquals(
+                fiveEuros.multiply(2),
+                PricingPolicy.computePerHour(duration, fiveEuros,false));
     }
 }

@@ -67,6 +67,7 @@ public class ParkingTest extends TestHelper {
         assertEquals(dateTime6h5min, outUsage.getIncomingDateTime());
         assertEquals(dateTime6h55min, outUsage.getOutgoingDateTime());
         assertEquals(duration50min, outUsage.computeDuration());
+        assertTrue(outUsage.getSlot().getPolicy().testCompatible(e20));
         assertFalse(outUsage.isUsingAlternative());
         // Finally the price has to be 5 euros for the started hour + 1 euro fixed
         assertEquals(FIVE.add(ONE), checkOutResult.getPrice());

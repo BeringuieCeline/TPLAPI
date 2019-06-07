@@ -1,7 +1,6 @@
 package io.github.jeallasia.tplapi;
 
 import io.github.jeallasia.tplapi.exception.ParkingException;
-import io.github.jeallasia.tplapi.util.PredicateWithAlt;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -21,9 +20,10 @@ public class Parking<T> {
             private LocalDateTime outgoingDateTime;
 
             ParkingSlotUsageImpl(ParkingSlot<T> slot, T car, boolean usingAlternative, LocalDateTime incomingDateTime) {
+                Objects.requireNonNull(incomingDateTime);
                 this.slot = slot;
                 this.car = car;
-                this.incomingDateTime = incomingDateTime == null ? LocalDateTime.now() : incomingDateTime;
+                this.incomingDateTime = incomingDateTime;
                 this.usingAlternative = usingAlternative;
             }
 

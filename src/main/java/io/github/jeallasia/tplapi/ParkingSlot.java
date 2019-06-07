@@ -1,5 +1,4 @@
 package io.github.jeallasia.tplapi;
-import io.github.jeallasia.tplapi.util.PredicateWithAlt;
 
 import java.util.Objects;
 
