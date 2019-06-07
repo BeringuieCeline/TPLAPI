@@ -38,7 +38,7 @@ public class ParkingBuilderTest extends TestHelper{
                 .addSlot("GAS__ALT_chargeNotRequired", isGAS, isChargeNotRequired)
                 .addSlot(PredicateWithAlt.buildAlt(isGAS, isChargeNotRequired))
                 .addSlot("PredicateWithAlt", PredicateWithAlt.buildAlt(isGAS, isChargeNotRequired))
-                .build().getSize(), 7);
+                .build().getSize(), 8);
     }
 
     @Test
