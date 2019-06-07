@@ -86,6 +86,12 @@ public class ParkingTest extends TestHelper {
         assertEquals(40, parking.getSizeFor(gas));
         assertEquals(10, parking.getSizeFor(e20ChargeNotRequired));
         assertEquals(10, parking.getSizeFor(e50ChargeNotRequired));
+        cars.forEach(parking::checkOut);
+        assertEquals(10, parking.getSizeFor(e20));
+        assertEquals(10, parking.getSizeFor(e50));
+        assertEquals(40, parking.getSizeFor(gas));
+        assertEquals(10, parking.getSizeFor(e20ChargeNotRequired));
+        assertEquals(10, parking.getSizeFor(e50ChargeNotRequired));
     }
 
     @Test
@@ -96,6 +102,12 @@ public class ParkingTest extends TestHelper {
         assertEquals(40, parking.getSizeAltFor(e20ChargeNotRequired()));
         assertEquals(40, parking.getSizeAltFor(e50ChargeNotRequired()));
         cars.forEach(parking::checkIn);
+        assertEquals(0, parking.getSizeAltFor(e20()));
+        assertEquals(0, parking.getSizeAltFor(e50()));
+        assertEquals(0, parking.getSizeAltFor(gas()));
+        assertEquals(40, parking.getSizeAltFor(e20ChargeNotRequired()));
+        assertEquals(40, parking.getSizeAltFor(e50ChargeNotRequired()));
+        cars.forEach(parking::checkOut);
         assertEquals(0, parking.getSizeAltFor(e20()));
         assertEquals(0, parking.getSizeAltFor(e50()));
         assertEquals(0, parking.getSizeAltFor(gas()));
@@ -116,6 +128,12 @@ public class ParkingTest extends TestHelper {
         assertEquals(40, parking.getSizeCompatibleFor(gas));
         assertEquals(50, parking.getSizeCompatibleFor(e20ChargeNotRequired));
         assertEquals(50, parking.getSizeCompatibleFor(e50ChargeNotRequired));
+        cars.forEach(parking::checkOut);
+        assertEquals(10, parking.getSizeCompatibleFor(e20));
+        assertEquals(10, parking.getSizeCompatibleFor(e50));
+        assertEquals(40, parking.getSizeCompatibleFor(gas));
+        assertEquals(50, parking.getSizeCompatibleFor(e20ChargeNotRequired));
+        assertEquals(50, parking.getSizeCompatibleFor(e50ChargeNotRequired));
     }
 
     @Test
@@ -131,6 +149,12 @@ public class ParkingTest extends TestHelper {
         assertEquals(25, parking.getAvailableSizeFor(gas));
         assertEquals(0, parking.getAvailableSizeFor(e20ChargeNotRequired));
         assertEquals(0, parking.getAvailableSizeFor(e50ChargeNotRequired));
+        cars.forEach(parking::checkOut);
+        assertEquals(10, parking.getAvailableSizeFor(e20));
+        assertEquals(10, parking.getAvailableSizeFor(e50));
+        assertEquals(40, parking.getAvailableSizeFor(gas));
+        assertEquals(10, parking.getAvailableSizeFor(e20ChargeNotRequired));
+        assertEquals(10, parking.getAvailableSizeFor(e50ChargeNotRequired));
     }
 
     @Test
@@ -146,6 +170,12 @@ public class ParkingTest extends TestHelper {
         assertEquals(0, parking.getAvailableSizeAltFor(gas));
         assertEquals(25, parking.getAvailableSizeAltFor(e20ChargeNotRequired));
         assertEquals(25, parking.getAvailableSizeAltFor(e50ChargeNotRequired));
+        cars.forEach(parking::checkOut);
+        assertEquals(0, parking.getAvailableSizeAltFor(e20));
+        assertEquals(0, parking.getAvailableSizeAltFor(e50));
+        assertEquals(0, parking.getAvailableSizeAltFor(gas));
+        assertEquals(40, parking.getAvailableSizeAltFor(e20ChargeNotRequired));
+        assertEquals(40, parking.getAvailableSizeAltFor(e50ChargeNotRequired));
     }
 
     @Test
@@ -161,6 +191,12 @@ public class ParkingTest extends TestHelper {
         assertEquals(25, parking.getAvailableSizeCompatibleFor(gas));
         assertEquals(25, parking.getAvailableSizeCompatibleFor(e20ChargeNotRequired));
         assertEquals(25, parking.getAvailableSizeCompatibleFor(e50ChargeNotRequired));
+        cars.forEach(parking::checkOut);
+        assertEquals(10, parking.getAvailableSizeCompatibleFor(e20));
+        assertEquals(10, parking.getAvailableSizeCompatibleFor(e50));
+        assertEquals(40, parking.getAvailableSizeCompatibleFor(gas));
+        assertEquals(50, parking.getAvailableSizeCompatibleFor(e20ChargeNotRequired));
+        assertEquals(50, parking.getAvailableSizeCompatibleFor(e50ChargeNotRequired));
     }
 
     @Rule
