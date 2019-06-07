@@ -20,7 +20,7 @@ public interface PredicateWithAlt<T> extends Predicate<T> {
     static <T> PredicateWithAlt<T> buildAlt(Predicate<T>  main, Predicate<T> alt) {
         Objects.requireNonNull(main);
         Objects.requireNonNull(alt);
-        return new PredicateWithAlt<>() {
+        return new PredicateWithAlt<T>() {
             @Override
             public boolean test(T t) {
                 return main.test(t);
