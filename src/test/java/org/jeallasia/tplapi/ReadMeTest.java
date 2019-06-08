@@ -3,6 +3,7 @@ import org.javamoney.moneta.Money;
 import org.junit.Test;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 
 import static org.junit.Assert.*;
 
@@ -19,8 +20,8 @@ public class ReadMeTest {
             this.chargeNotRequired = chargeNotRequired;
         }
 
-        public boolean isChargeNotRequired() { return chargeNotRequired; }
-        public CarType getCarType(){ return carType; }
+        boolean isChargeNotRequired() { return chargeNotRequired; }
+        CarType getCarType(){ return carType; }
     }
 
     @Test
@@ -38,12 +39,9 @@ public class ReadMeTest {
                 .build();
 
         Car e20 = new Car(CarType.E20KW, true);
-        CheckInResult<Car> checkInResult = parking.checkIn(e20);
+        CheckInResult<Car> checkInResult = parking.checkIn(e20, LocalDateTime.now().minus(Duration.ofMinutes(5)));
         assertTrue(checkInResult.isSuccessful());
-        assertEquals(Money.of(5, "EUR"),
-                parking.checkOut(e20,
-                        checkInResult.geSlot().getIncomingDateTime().plus(Duration.ofMinutes(5))
-                ).getPrice());
+        assertEquals(Money.of(5, "EUR"), parking.checkOut(e20).getPrice());
     }
 
 }
