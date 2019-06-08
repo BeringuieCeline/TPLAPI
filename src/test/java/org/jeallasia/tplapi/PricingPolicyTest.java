@@ -6,7 +6,7 @@ import javax.money.MonetaryAmount;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PricingPolicyTest extends TestHelper {
     /**
@@ -106,9 +106,9 @@ public class PricingPolicyTest extends TestHelper {
     }
 
     @Test
-    public void testCustom(){
+    public void testCustom() {
         PricingPolicy<TestCar> freeForElectric = slot -> {
-            if ((slot.getCar().carType == CarType.ELECTRIC_20KW) || (slot.getCar().carType == CarType.ELECTRIC_50KW)){
+            if ((slot.getCar().carType == CarType.ELECTRIC_20KW) || (slot.getCar().carType == CarType.ELECTRIC_50KW)) {
                 return euros(0);
             }
             return PricingPolicy.<TestCar>PER_STARTED_HOUR(euros(10)).computePrice(slot);

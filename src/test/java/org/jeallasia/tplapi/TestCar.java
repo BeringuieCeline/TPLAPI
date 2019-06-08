@@ -1,11 +1,11 @@
 package org.jeallasia.tplapi;
 
-public class TestCar{
+public class TestCar {
 
     private final int id;
     private final boolean chargeNotRequired;
     final CarType carType;
-    private static int simpleCptForId=0;
+    private static int simpleCptForId = 0;
 
     TestCar(CarType carType, boolean chargeNotRequired) {
         this.id = simpleCptForId++;

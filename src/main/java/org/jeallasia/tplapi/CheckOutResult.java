@@ -7,7 +7,7 @@ import javax.money.MonetaryAmount;
  *
  * @param <T> The Car class you want to use
  */
-public final class CheckOutResult<T>{
+public final class CheckOutResult<T> {
 
     private final ParkingSlot<T> slot;
     private final MonetaryAmount price;
@@ -15,7 +15,7 @@ public final class CheckOutResult<T>{
     /**
      * Created during {@link Parking#checkOut(Object)}
      */
-    CheckOutResult(ParkingSlot<T> slot, MonetaryAmount price){
+    CheckOutResult(ParkingSlot<T> slot, MonetaryAmount price) {
         this.slot = slot;
         this.price = price;
     }

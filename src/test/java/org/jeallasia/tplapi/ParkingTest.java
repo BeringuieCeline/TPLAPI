@@ -201,7 +201,7 @@ public class ParkingTest extends TestHelper {
     public ExpectedException expectedEx = ExpectedException.none();
 
     @Test
-    public void testInvalidOutgoingDate(){
+    public void testInvalidOutgoingDate() {
         parking.checkIn(e20, dateTime6h55min);
         expectedEx.expect(IllegalArgumentException.class);
         expectedEx.expectMessage("Outgoing date should be after incoming date !");
@@ -209,7 +209,7 @@ public class ParkingTest extends TestHelper {
     }
 
     @Test
-    public void testClassicCheckInCheckOut(){
+    public void testClassicCheckInCheckOut() {
         parking.checkIn(e20);
         assertEquals(e20, parking.checkOut(e20).getSlot().getCar());
     }

@@ -12,7 +12,7 @@ public final class CheckInResult<T> {
     /**
      * Created during {@link Parking#checkIn(Object)}
      */
-    CheckInResult(){
+    CheckInResult() {
 
     }
 
@@ -29,7 +29,7 @@ public final class CheckInResult<T> {
     /**
      * @return {@code true} if a slot was found during checkIn phase
      */
-    public boolean isSuccessful(){
+    public boolean isSuccessful() {
         return slot != null;
     }
 

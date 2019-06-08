@@ -1,12 +1,15 @@
 package org.jeallasia.tplapi;
+
 import org.jeallasia.tplapi.exception.ParkingException;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class ParkingBuilderTest extends TestHelper{
+public class ParkingBuilderTest extends TestHelper {
 
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
@@ -55,7 +58,7 @@ public class ParkingBuilderTest extends TestHelper{
         // With custom policy that gives 0 if it's an electric car ! And classic for other cars
         Parking<TestCar> parking = Parking.<TestCar>builder()
                 .setPricingPolicy(
-                    usage -> isE20.or(isE50).test(usage.getCar()) ? euros(0): FIVE_PER_HOUR_STARTED_ONE_FIXED.computePrice(usage))
+                        usage -> isE20.or(isE50).test(usage.getCar()) ? euros(0) : FIVE_PER_HOUR_STARTED_ONE_FIXED.computePrice(usage))
                 .addSlot(isE20)
                 .addSlot(isGAS)
                 .build();

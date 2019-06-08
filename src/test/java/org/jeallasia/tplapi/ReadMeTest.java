@@ -1,17 +1,19 @@
 package org.jeallasia.tplapi;
+
 import org.javamoney.moneta.Money;
 import org.junit.Test;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ReadMeTest {
 
-    public enum CarType { GAS, E20KW, E50KW, OTHER }
+    public enum CarType {GAS, E20KW, E50KW, OTHER}
 
-    public class Car{
+    public class Car {
         private final CarType carType;
         private boolean chargeNotRequired;
 
@@ -20,12 +22,17 @@ public class ReadMeTest {
             this.chargeNotRequired = chargeNotRequired;
         }
 
-        boolean isChargeNotRequired() { return chargeNotRequired; }
-        CarType getCarType(){ return carType; }
+        boolean isChargeNotRequired() {
+            return chargeNotRequired;
+        }
+
+        CarType getCarType() {
+            return carType;
+        }
     }
 
     @Test
-    public void testFromREADME(){
+    public void testFromREADME() {
         Parking<Car> parking = Parking.<Car>builder()
                 // Set the pricing policy to 5 euros per hour started
                 .setPricingPolicy(PricingPolicy.PER_STARTED_HOUR(Money.of(5, "EUR")))
