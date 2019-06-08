@@ -1,4 +1,4 @@
-package io.github.jeallasia.tplapi.exception;
+package org.jeallasia.tplapi.exception;
 
 public class ParkingException extends RuntimeException {
 

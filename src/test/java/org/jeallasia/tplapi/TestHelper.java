@@ -1,5 +1,4 @@
-package oi.github.jeallasia.tplapi;
-import io.github.jeallasia.tplapi.*;
+package org.jeallasia.tplapi;
 import org.javamoney.moneta.Money;
 
 import javax.money.MonetaryAmount;
@@ -9,6 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 
 public class TestHelper {
 

@@ -1,6 +1,5 @@
-package oi.github.jeallasia.tplapi;
+package org.jeallasia.tplapi;
 
-import io.github.jeallasia.tplapi.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

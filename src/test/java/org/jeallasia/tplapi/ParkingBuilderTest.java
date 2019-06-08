@@ -1,7 +1,5 @@
-package oi.github.jeallasia.tplapi;
-import io.github.jeallasia.tplapi.*;
-import io.github.jeallasia.tplapi.exception.ParkingException;
-import io.github.jeallasia.tplapi.PredicateWithAlt;
+package org.jeallasia.tplapi;
+import org.jeallasia.tplapi.exception.ParkingException;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 

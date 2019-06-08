@@ -1,4 +1,4 @@
-package io.github.jeallasia.tplapi;
+package org.jeallasia.tplapi;
 import javax.money.MonetaryAmount;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;

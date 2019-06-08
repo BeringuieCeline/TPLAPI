@@ -1,7 +1,5 @@
-package oi.github.jeallasia.tplapi;
+package org.jeallasia.tplapi;
 
-import io.github.jeallasia.tplapi.ParkingSlot;
-import io.github.jeallasia.tplapi.PricingPolicy;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;

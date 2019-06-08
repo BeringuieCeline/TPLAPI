@@ -1,4 +1,4 @@
-package io.github.jeallasia.tplapi;
+package org.jeallasia.tplapi;
 
 public final class CheckInResult<T> {
 

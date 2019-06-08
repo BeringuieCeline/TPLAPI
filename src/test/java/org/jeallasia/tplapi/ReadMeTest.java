@@ -1,9 +1,10 @@
-package oi.github.jeallasia.tplapi;
-import io.github.jeallasia.tplapi.CheckInResult;
-import io.github.jeallasia.tplapi.Parking;
-import io.github.jeallasia.tplapi.PricingPolicy;
+package org.jeallasia.tplapi;
 import org.javamoney.moneta.Money;
 import org.junit.Test;
+
+import java.time.Duration;
+
+import static org.junit.Assert.*;
 
 public class ReadMeTest {
 
@@ -38,6 +39,11 @@ public class ReadMeTest {
 
         Car e20 = new Car(CarType.E20KW, true);
         CheckInResult<Car> checkInResult = parking.checkIn(e20);
+        assertTrue(checkInResult.isSuccessful());
+        assertEquals(Money.of(5, "EUR"),
+                parking.checkOut(e20,
+                        checkInResult.geSlot().getIncomingDateTime().plus(Duration.ofMinutes(5))
+                ).getPrice());
     }
 
 }

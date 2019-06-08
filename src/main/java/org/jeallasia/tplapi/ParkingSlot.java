@@ -1,4 +1,4 @@
-package io.github.jeallasia.tplapi;
+package org.jeallasia.tplapi;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -77,12 +77,10 @@ public final class ParkingSlot<T> implements Cloneable{
         if (incomingDateTime.isAfter(outgoingDateTime)) {
             throw new IllegalArgumentException("Outgoing date should be after incoming date !");
         }
-        this.outgoingDateTime = outgoingDateTime;
         ParkingSlot<T> result = new ParkingSlot<>(id, policy, car, incomingDateTime, usingAlternative, outgoingDateTime);
         this.car = null;
         this.incomingDateTime = null;
         this.usingAlternative = null;
-        this.outgoingDateTime = null;
         return result;
     }
 

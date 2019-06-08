@@ -1,6 +1,6 @@
-package io.github.jeallasia.tplapi;
+package org.jeallasia.tplapi;
 
-import io.github.jeallasia.tplapi.exception.ParkingException;
+import org.jeallasia.tplapi.exception.ParkingException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Stream;

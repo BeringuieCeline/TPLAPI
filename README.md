@@ -2,8 +2,7 @@
 [![Code Coverage](https://codecov.io/gh/Jallasia/TPLAPI/coverage.svg)](https://codecov.io/gh/Jallasia/TPLAPI)
 
 # TPLAPI
-Toll Parking Library Java API
-
+Toll Parking Library Java API compatible with your own Car class allow you to define your parking (specifying parking slot allocation policy and pricing policy) and use it to check in check out cars.
 
 ## Usage
 
@@ -76,4 +75,39 @@ PricingPolicy<TestCar> freeForElectric = slot -> {
     }
     return fivePerFinishedHourAndTwoFixed.computePrice(slot);
 };
+```
+
+### Parking usage
+
+Let's define some cars:
+
+```java
+Car e20ChargeNotRequired = new Car(CarType.E20KW, true);
+
+```
+
+#### CheckIn
+
+When you checkIn a car, the parking will return a CheckInResult:
+- The CheckInResult if successful contains a copy of the ParkingSlot<Car> that was allocated for the car.
+- The slot allocated will be the first one that is available and that accept this kind of car, if there are no more slots available using the primary criteria, then the alternative one will be used.
+
+```java
+Car e20 = new Car(CarType.E20KW, false);
+CheckInResult<Car> checkInResult = parking.checkIn(e20);
+if(checkInResult.isSuccessful()){
+    ParkingSlot<Car> theAllocatedSlot = checkInResult.getSlot();
+}
+```
+
+#### CheckOut
+
+When you checkOut a car, the parking will return a CheckOutResult:
+- The CheckOutResult contains a copy of the ParkingSlot<Car> that was allocated for the car (the one in the parking will of course be flagged as free).
+- And the computed Price.
+
+```java
+CheckOutResult<Car> checkOutResult = parking.checkOut(e20);
+theAllocatedSlot = checkOutResult.getSlot();
+MonetaryAmount price = checkoutResult.Price();
 ```

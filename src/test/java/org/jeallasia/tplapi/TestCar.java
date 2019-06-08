@@ -1,4 +1,4 @@
-package oi.github.jeallasia.tplapi;
+package org.jeallasia.tplapi;
 
 public class TestCar{
 

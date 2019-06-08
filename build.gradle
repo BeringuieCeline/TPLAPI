@@ -6,7 +6,7 @@ jacoco {
 }
 
 
-group 'io.github.jeallasia'
+group 'org.jeallasia'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.9
