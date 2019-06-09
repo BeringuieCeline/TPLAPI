@@ -15,7 +15,7 @@ public interface PricingPolicy<T> {
     /**
      * The method that provide a pricing from the provided ParkingSlot data
      *
-     * @param slot the {@link ParkingSlot<T>} that requires pricing
+     * @param slot the {@link ParkingSlot} that requires pricing
      * @return the price in {@link MonetaryAmount}
      */
     MonetaryAmount computePrice(ParkingSlot<T> slot);
@@ -26,7 +26,7 @@ public interface PricingPolicy<T> {
      * @param policy1 the first policy
      * @param policy2 the second one
      * @param <T> the Class you use for your cars
-     * @return resulting {@link PricingPolicy<T>}
+     * @return resulting {@link PricingPolicy}
      */
     static <T> PricingPolicy<T> AND(PricingPolicy<T> policy1, PricingPolicy<T> policy2) {
         return slot -> policy1.computePrice(slot).add(policy2.computePrice(slot));
@@ -38,7 +38,7 @@ public interface PricingPolicy<T> {
      * @param pricePerHour the price per hour
      * @param countHourStarted if true, count hour started (only hour finished if false)
      * @param <T> the Class you use for your cars
-     * @return {@link PricingPolicy<T>} based on a price per hour
+     * @return {@link PricingPolicy} based on a price per hour
      */
     static <T> PricingPolicy<T> PER_HOUR(MonetaryAmount pricePerHour, boolean countHourStarted) {
         return slot -> computePerHour(slot.computeDuration(), pricePerHour, countHourStarted);
@@ -49,7 +49,7 @@ public interface PricingPolicy<T> {
      *
      * @param fixedPrice fixed price
      * @param <T> the Class you use for your cars
-     * @return {@link PricingPolicy<T>} based on a price per hour
+     * @return {@link PricingPolicy} based on a price per hour
      */
     static <T> PricingPolicy<T> FIXED(MonetaryAmount fixedPrice) {
         return usage -> fixedPrice;
@@ -60,7 +60,7 @@ public interface PricingPolicy<T> {
      *
      * @param pricePerHour the price per hour
      * @param <T> the Class you use for your cars
-     * @return {@link PricingPolicy<T>} based on a price per started hour
+     * @return {@link PricingPolicy} based on a price per started hour
      */
     static <T> PricingPolicy<T> PER_STARTED_HOUR(MonetaryAmount pricePerHour) {
         return PER_HOUR(pricePerHour, true);
@@ -71,7 +71,7 @@ public interface PricingPolicy<T> {
      *
      * @param pricePerHour the price per hour
      * @param <T> the Class you use for your cars
-     * @return {@link PricingPolicy<T>} based on a price per finished hour
+     * @return {@link PricingPolicy} based on a price per finished hour
      */
     static <T> PricingPolicy<T> PER_FINISHED_HOUR(MonetaryAmount pricePerHour) {
         return PER_HOUR(pricePerHour, false);
@@ -83,7 +83,7 @@ public interface PricingPolicy<T> {
      * @param pricePerHour the price per hour
      * @param fixedPrice fixed price
      * @param <T> the Class you use for your cars
-     * @return {@link PricingPolicy<T>} based on a price per finished hour and a fixed price
+     * @return {@link PricingPolicy} based on a price per finished hour and a fixed price
      */
     static <T> PricingPolicy<T> PER_FINISHED_HOUR_AND_FIXED(MonetaryAmount pricePerHour, MonetaryAmount fixedPrice) {
         return AND(PER_FINISHED_HOUR(pricePerHour), FIXED(fixedPrice));
@@ -95,7 +95,7 @@ public interface PricingPolicy<T> {
      * @param pricePerHour the price per hour
      * @param fixedPrice fixed price
      * @param <T> the Class you use for your cars
-     * @return {@link PricingPolicy<T>} based on a price per started hour and a fixed price
+     * @return {@link PricingPolicy} based on a price per started hour and a fixed price
      */
     static <T> PricingPolicy<T> PER_STARTED_HOUR_AND_FIXED(MonetaryAmount pricePerHour, MonetaryAmount fixedPrice) {
         return AND(PER_STARTED_HOUR(pricePerHour), FIXED(fixedPrice));

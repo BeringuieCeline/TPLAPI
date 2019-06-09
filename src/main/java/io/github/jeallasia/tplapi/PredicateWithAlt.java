@@ -4,7 +4,9 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 /**
- * Represents a pricing policy that can compute a price from a given {@link ParkingSlot}
+ * Classic {@link Predicate} with an alternative test, this allows {@link Parking} to select {@link ParkingSlot}
+ * using first {@link PredicateWithAlt#test(Object)} and if not found to use {@link PredicateWithAlt#testAlt(Object)}
+ * to find a potential alternative slot.
  *
  * @param <T> the type of the input to the predicate (The car class you are using)
  */
@@ -22,7 +24,7 @@ public interface PredicateWithAlt<T> extends Predicate<T> {
     }
 
     /**
-     * Evaluates the standard (See {@link Predicate<T>#test} and the alternative predicate on the given argument.
+     * Evaluates the standard (See {@link Predicate#test} and the alternative predicate on the given argument.
      *
      * @param t the input argument
      * @return {@code true} if the input argument matches the predicate or the alternative predicate,

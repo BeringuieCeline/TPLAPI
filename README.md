@@ -4,6 +4,13 @@
 # TPLAPI
 Toll Parking Library Java API compatible with your own Car class allow you to define your parking (specifying parking slot allocation policy and pricing policy) and use it to check in check out cars.
 
+## Install from source
+
+git clone git@github.com:Jallasia/TPLAPI.git
+cd TPLAPI
+./gradlew build -x javadoc
+cp build/libs/tplapi-{version}.jar /home/you/project
+
 ## Usage
 
 You can use any type of Class as input for the parking.
@@ -108,6 +115,5 @@ When you checkOut a car, the parking will return a CheckOutResult:
 
 ```java
 CheckOutResult<Car> checkOutResult = parking.checkOut(e20);
-theAllocatedSlot = checkOutResult.getSlot();
-MonetaryAmount price = checkoutResult.Price();
+MonetaryAmount price = checkOutResult.Price();
 ```

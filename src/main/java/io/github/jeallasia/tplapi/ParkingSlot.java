@@ -1,4 +1,4 @@
-package org.jeallasia.tplapi;
+package io.github.jeallasia.tplapi;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -37,7 +37,7 @@ public final class ParkingSlot<T> implements Cloneable {
     }
 
     /**
-     * Constructor used in {@link Parking<T>}
+     * Constructor used in {@link Parking}
      * @param id the indicative id of the ParkingSlot
      * @param policy the allocation policy
      */
