@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * Parking class compatible with any kind of Car class, allowing {@link Parking#checkIn(Object)} to the right slot
+ * and {@link Parking#checkOut(Object)} that will provide the corresponding computed price.
+ * See {@link Parking#builder()} that returns a {@link ParkingBuilder} to specify parking slot allocation policy and pricing policy.
+ * @param <T> the car class you want to use
+ */
 public class Parking<T> {
 
     /**
@@ -25,10 +31,12 @@ public class Parking<T> {
     }
 
     /**
-     * @param <K> the car class you want to use
+     * Create a new {@link ParkingBuilder} to define your parking.
+     *
+     * @param <T> the car class you want to use
      * @return the builder
      */
-    public static <K> ParkingBuilder<K> builder() {
+    public static <T> ParkingBuilder<T> builder() {
         return new ParkingBuilder<>();
     }
 
@@ -93,6 +101,8 @@ public class Parking<T> {
     }
 
     /**
+     * Return the number of compatible (preferred or alternative) slots for this car.
+     *
      * @param car The car you want to test
      * @return number of compatible (preferred or alternative) slots for this car.
      */
@@ -101,6 +111,8 @@ public class Parking<T> {
     }
 
     /**
+     * Return the number of alternative slots for this car.
+     *
      * @param car The car you want to test
      * @return number of alternative slots for this car.
      */
@@ -109,6 +121,8 @@ public class Parking<T> {
     }
 
     /**
+     * Return the number of preferred slots for this car.
+     *
      * @param car The car you want to test
      * @return number of preferred slots for this car.
      */
@@ -117,6 +131,8 @@ public class Parking<T> {
     }
 
     /**
+     * Return the number of free and compatible (preferred or alternative) slots for this car.
+     *
      * @param car The car you want to test
      * @return number of free and compatible (preferred or alternative) slots for this car.
      */
@@ -125,6 +141,8 @@ public class Parking<T> {
     }
 
     /**
+     * Return the number of free and alternative slots for this car.
+     *
      * @param car The car you want to test
      * @return number of free and alternative slots for this car.
      */
@@ -133,6 +151,8 @@ public class Parking<T> {
     }
 
     /**
+     * Return the number of free and preferred slots for this car.
+     *
      * @param car The car you want to test
      * @return number of free and preferred slots for this car.
      */

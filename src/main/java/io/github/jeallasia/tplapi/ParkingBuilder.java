@@ -2,6 +2,10 @@ package io.github.jeallasia.tplapi;
 
 import java.util.function.Predicate;
 
+/**
+ * The builder associated with {@link Parking} used to specify parking slot allocation policy and pricing policy.
+ * @param <T> the car class you want to use
+ */
 public class ParkingBuilder<T> {
 
     private final Parking<T> instance;

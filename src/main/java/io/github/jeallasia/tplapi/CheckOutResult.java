@@ -21,13 +21,17 @@ public final class CheckOutResult<T> {
     }
 
     /**
-     * @return a copy of the allocated slot during checkOut phase
+     * Return a copy of the slot that was allocated to this car
+     *
+     * @return a copy of the slot that was allocated to this car
      */
     public ParkingSlot<T> getSlot() {
         return slot;
     }
 
     /**
+     * Return the computed price
+     *
      * @return the computed price
      */
     public MonetaryAmount getPrice() {

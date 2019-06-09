@@ -27,6 +27,8 @@ public final class CheckInResult<T> {
     }
 
     /**
+     * Return {@code true} if a slot was found.
+     *
      * @return {@code true} if a slot was found during checkIn phase
      */
     public boolean isSuccessful() {
@@ -34,6 +36,8 @@ public final class CheckInResult<T> {
     }
 
     /**
+     * Return the slot that was allocated for this car.
+     *
      * @return a copy of the allocated slot during checkIn phase
      */
     public ParkingSlot<T> geSlot() {
