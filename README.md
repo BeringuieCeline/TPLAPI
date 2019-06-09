@@ -12,7 +12,10 @@ cd TPLAPI
 ./gradlew build
 ```
 
-The JAR will then be available into build/libs folder.
+The build folder will then contains:
+- Javadoc: build/docs/javadoc/index.html
+- Jar: build/libs/tplapi-1.0-SNAPSHOT.jar
+But also the test results and reports.
 
 
 ## Usage
