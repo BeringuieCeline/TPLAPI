@@ -4,7 +4,36 @@
 # TPLAPI
 Toll Parking Library Java API compatible with your own Car class allow you to define your parking (specifying parking slot allocation policy and pricing policy) and use it to check in check out cars.
 
-## Build from source
+## Install
+
+WARNING: Only install from source available for now (waiting for https://issues.sonatype.org/browse/OSSRH-49259).
+
+### Maven (not available yet)
+
+```xml
+<dependencies>
+    <dependency>
+      <groupId>io.github.jeallasia</groupId>
+      <artifactId>tplapi</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <!-- tplapi depends on org.javamoney.moneta to manage prices and define pricing policies -->
+    <dependency>
+        <groupId>org.javamoney</groupId>
+        <artifactId>moneta</artifactId>
+        <version>1.3</version>
+    </dependency>
+</dependencies>
+```
+
+### Gradle (not available yet)
+
+```groovy
+compile 'io.github.jeallasia:tplapi:1.0-SNAPSHOT'
+compile 'org.javamoney:moneta:1.3'
+```
+
+### From source
 
 ```
 git clone git@github.com:Jallasia/TPLAPI.git
