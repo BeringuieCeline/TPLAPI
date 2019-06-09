@@ -1,4 +1,4 @@
-package org.jeallasia.tplapi;
+package io.github.jeallasia.tplapi;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package org.jeallasia.tplapi;
+package io.github.jeallasia.tplapi;
 
 /**
  * This class is used to expose the result of {@link Parking#checkIn(Object)}

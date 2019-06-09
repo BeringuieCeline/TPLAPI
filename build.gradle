@@ -1,10 +1,19 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'jacoco'
+apply plugin: 'com.bmuschko.nexus'
 
 jacoco {
     toolVersion = "0.8.4"
 }
-
 
 group 'io.github.jeallasia'
 version '1.0-SNAPSHOT'
@@ -30,3 +39,35 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+
+modifyPom {
+    project {
+        name 'tplapi'
+        description 'Toll Parking Library java API'
+        url 'https://github.com/Jallasia/TPLAPI'
+        inceptionYear '2019'
+        scm {
+            url 'https://github.com/Jallasia/TPLAPI'
+            connection 'scm:git:git://github.com/Jallasia/TPLAPI.git'
+            developerConnection 'scm:git:git@github.com:Jallasia/TPLAPI.git'
+        }
+        developers {
+            developer {
+                id 'jeallasia'
+                name 'Jerome Allasia'
+                email 'jerome.allasia@gmail.com'
+            }
+        }
+    }
+}
+extraArchive {
+    sources = true
+    tests = true
+    javadoc = true
+}
+nexus {
+    sign = true
+    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
+}
+

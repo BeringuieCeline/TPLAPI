@@ -1,4 +1,4 @@
-package org.jeallasia.tplapi;
+package io.github.jeallasia.tplapi;
 
 public enum CarType {
     GASOLINE,

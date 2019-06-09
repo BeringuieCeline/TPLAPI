@@ -1,6 +1,6 @@
-package org.jeallasia.tplapi;
+package io.github.jeallasia.tplapi;
 
-import org.jeallasia.tplapi.exception.ParkingException;
+import io.github.jeallasia.tplapi.exception.ParkingException;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

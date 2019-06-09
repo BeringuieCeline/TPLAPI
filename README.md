@@ -4,12 +4,15 @@
 # TPLAPI
 Toll Parking Library Java API compatible with your own Car class allow you to define your parking (specifying parking slot allocation policy and pricing policy) and use it to check in check out cars.
 
-## Install from source
+## Build from source
 
+```
 git clone git@github.com:Jallasia/TPLAPI.git
 cd TPLAPI
-./gradlew build -x javadoc
-cp build/libs/tplapi-{version}.jar /home/you/project
+./gradlew build
+```
+
+The JAR will then be available into build/libs folder.
 
 ## Usage
 
